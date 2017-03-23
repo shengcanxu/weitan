@@ -11,14 +11,14 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="phone" class="col-md-4 control-label">Phone Number:</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="phone" type="number" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('phone'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -54,9 +54,9 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
+                                {{--<a class="btn btn-link" href="{{ route('password.request') }}">--}}
+                                    {{--Forgot Your Password?--}}
+                                {{--</a>--}}
                             </div>
                         </div>
                     </form>

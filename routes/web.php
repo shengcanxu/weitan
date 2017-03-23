@@ -19,4 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/test', 'TestController@index');
+Route::group(['middleware'=>'auth'], function (){
+    Route::get('/test', 'TestController@index');
+});
+
+Route::group(['prefix' => 'helper'], function()
+{
+    Route::get('/token', 'HelperController@token');
+});
+
+Route::get('/test2', 'TestController@index2');
+

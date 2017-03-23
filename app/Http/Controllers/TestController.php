@@ -9,6 +9,10 @@ use App\User;
 
 class TestController extends Controller
 {
+    public function  index2(){
+        return view('test');
+    }
+
     public function  index(){
 //        $owner = new Role();
 //        $owner->name         = 'owner';
@@ -54,5 +58,7 @@ class TestController extends Controller
         var_dump($user->hasRole('admin'));   // true
         var_dump($user->can('edit-user'));   // false
         var_dump($user->can('create-post')); // true
+
+        return view("test");
     }
 }

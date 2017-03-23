@@ -7,9 +7,6 @@
 
         <title>Laravel</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
         <!-- Styles -->
         <style>
             html, body {
@@ -72,7 +69,7 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        {{--<a href="{{ url('/register') }}">Register</a>--}}
                     @endif
                 </div>
             @endif
