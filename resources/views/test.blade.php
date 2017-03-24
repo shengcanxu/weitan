@@ -11,7 +11,7 @@
             var pos = location.href.indexOf("?");
             var url ="http://localhost/weitan2/public/login";
             if(pos > 0){
-                url = url + param;    
+                url = url + location.href.substr(pos);
             }
             $.post(url,{phone:"18565129949",password:"123456",_token:window.Laravel.csrfToken});
         }

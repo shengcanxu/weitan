@@ -26,6 +26,7 @@ Route::group(['middleware'=>'auth'], function (){
 Route::group(['prefix' => 'helper'], function()
 {
     Route::get('/token', 'HelperController@token');
+    Route::get('/energytypes', 'HelperController@energytypes');
 });
 
 Route::get('/test2', 'TestController@index2');
