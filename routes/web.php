@@ -19,8 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['middleware'=>'auth'], function (){
-    Route::get('/test', 'TestController@index');
+Route::group(['middleware'=>'auth','prefix'=>'EnergyStore'], function (){
+    Route::get('/', 'EnergyStoreController@index');
+    Route::post('/', 'EnergyStoreController@store');
+    Route::post('/tagerror', 'EnergyStoreController@tagerror');
 });
 
 Route::group(['prefix' => 'helper'], function()
@@ -30,4 +32,5 @@ Route::group(['prefix' => 'helper'], function()
 });
 
 Route::get('/test2', 'TestController@index2');
+
 

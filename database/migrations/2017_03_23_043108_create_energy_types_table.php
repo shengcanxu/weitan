@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEnergytypesTable extends Migration
+class CreateEnergyTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEnergytypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('energytypes', function (Blueprint $table) {
+        Schema::create('energy_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();

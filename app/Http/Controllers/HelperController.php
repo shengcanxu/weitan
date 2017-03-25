@@ -16,8 +16,7 @@ class HelperController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function energytypes(){
-        $energyTypes = DB::table("energytypes")->pluck('name');
+        $energyTypes = DB::table("energy_types")->pluck('name');
         return response()->json($energyTypes);
-
     }
 }
