@@ -23,12 +23,15 @@ Route::group(['middleware'=>'auth','prefix'=>'EnergyStore'], function (){
     Route::get('/', 'EnergyStoreController@index');
     Route::post('/', 'EnergyStoreController@store');
     Route::post('/tagerror', 'EnergyStoreController@tagerror');
+    Route::post('/analysis', 'EnergyStoreController@analysis');
+    Route::get('/analysis', 'EnergyStoreController@getanalysis');
 });
 
 Route::group(['prefix' => 'helper'], function()
 {
     Route::get('/token', 'HelperController@token');
     Route::get('/energytypes', 'HelperController@energytypes');
+    Route::post('/uploadimage', 'HelperController@uploadimage');
 });
 
 Route::get('/test2', 'TestController@index2');

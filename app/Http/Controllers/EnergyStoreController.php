@@ -4,15 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EnergyStoreRequest;
 use App\Http\Requests\EnergyStoreTagErrorRequest;
+use App\Models\EnergyStoreAnalysis;
 use Illuminate\Http\Request;
 use App\Models\EnergyStore;
-
+use Illuminate\Queue\RedisQueue;
 
 
 class EnergyStoreController extends Controller
 {
-    public function index(){
-        $items = EnergyStore::all();
+    public function index(Request $request){
+        $querytype = $request->get('type',null);
+        $datefrom = $request->get('from', '1900-01-01');
+        $dateto = $request->get('to', '2100-01-01');
+
+        $store = EnergyStore::where('storedate',">=", $datefrom)->where('storedate',"<=", $dateto);
+        if($querytype){
+            $store = $store->where('type',"=", $querytype);
+        }
+
+        $items = $store->get();
         $items->load('author');
         $itemsArray = [];
         foreach ($items as $item){
@@ -46,9 +56,39 @@ class EnergyStoreController extends Controller
             return response()->json(['status'=>'success']);
         }
 
-        return response()->json(['status'=>'fail','error'=>'id not exists']);
+        return response()->json(['status'=>'fail','error'=>'id 不存在']);
     }
 
+    public function analysis(Request $request){
+        $analysis = new EnergyStoreAnalysis();
+        $analysis->energy_store_id = $request->get('energy_store_id');
+        $store = EnergyStore::find($analysis->energy_store_id);
+
+        if($store) {
+            $analysis->device = $request->get('device');
+            $analysis->method = $request->get('method');
+            $analysis->dwfrl = $request->get('dwfrl');
+            $analysis->dwrlhtl = $request->get('dwrlhtl');
+            $analysis->tyhl = $request->get('tyhl');
+            $analysis->author = $request->user()->id;
+            $analysis->save();
+
+            return response()->json(['status'=>'success']);
+        }
+
+        return response()->json(['status'=>'fail','error'=>'energy_store_id 不存在']);
+    }
+
+    public function getanalysis(Request $request){
+        $id = $request->get('energy_store_id');
+        $analysises = EnergyStoreAnalysis::where("energy_store_id","=", $id)->get();
+
+        $itemsArray = [];
+        foreach ($analysises as $item){
+            array_push($itemsArray, $item->attributesToArray());
+        }
+        return response()->json($itemsArray);
+    }
 
 
 }

@@ -5,18 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 
-class EnergyStoreTagErrorRequest extends FormRequest
+class EnergyStoreTagErrorRequest extends BaseFormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     public function messages()
     {
         return [
@@ -36,11 +26,5 @@ class EnergyStoreTagErrorRequest extends FormRequest
             'error' => 'required|boolean',
             'message' => 'max:400'
         ];
-    }
-
-    protected function formatErrors(Validator $validator)
-    {
-        $errors =  parent::formatErrors($validator);
-        return ['status'=>'validate_fail', 'errors'=>$errors];
     }
 }

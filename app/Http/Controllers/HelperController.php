@@ -19,4 +19,12 @@ class HelperController extends Controller
         $energyTypes = DB::table("energy_types")->pluck('name');
         return response()->json($energyTypes);
     }
+
+    public function uploadimage(Request $request){
+        if($request->hasFile("image")){
+            $image = $request->file("image");
+            $uploader = new \UploadImageHelper();
+            $uploader->upload($image);
+        }
+    }
 }

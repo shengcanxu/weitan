@@ -5,18 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EnergyStoreRequest extends FormRequest
+class EnergyStoreRequest extends BaseFormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     public function messages()
     {
         return [
@@ -43,11 +33,5 @@ class EnergyStoreRequest extends FormRequest
             'batchno' => 'required|unique:energy_stores',
             'number' => 'required|numeric'
         ];
-    }
-
-    protected function formatErrors(Validator $validator)
-    {
-        $errors =  parent::formatErrors($validator);
-        return ['status'=>'validate_fail', 'errors'=>$errors];
     }
 }
