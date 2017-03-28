@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+//化石燃料入库数据
 Route::group(['middleware'=>'auth','prefix'=>'EnergyStore'], function (){
     Route::get('/', 'EnergyStoreController@index');
     Route::post('/', 'EnergyStoreController@store');
@@ -30,6 +31,15 @@ Route::group(['middleware'=>'auth','prefix'=>'EnergyStore'], function (){
     Route::post('/{id}/analysis/{aid}/tagerror', 'EnergyStoreController@analysistagerror');
 });
 
+//化石燃料入炉数据
+Route::group(['middleware'=>'auth', 'prefix'=>'EnergyUsage'], function(){
+    Route::get('/','EnergyUsageController@index');
+    Route::post('/','EnergyUsageController@store');
+    Route::post('/{id}/change', 'EnergyUsageController@change');
+    Route::get('/{id}/delete', 'EnergyUsageController@delete');
+});
+
+
 Route::group(['prefix' => 'helper'], function()
 {
     Route::get('/token', 'HelperController@token');
@@ -37,6 +47,7 @@ Route::group(['prefix' => 'helper'], function()
     Route::post('/uploadimage', 'HelperController@uploadimage');
 });
 
-Route::get('/test2', 'TestController@index2');
+Route::get('/energystoretest', 'TestController@energystoretest');
+Route::get('/energyusagetest', 'TestController@energyusagetest');
 
 

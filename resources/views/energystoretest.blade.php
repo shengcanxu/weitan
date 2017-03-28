@@ -27,12 +27,12 @@
                 url = url + location.href.substr(pos);
             }
 
-            $.get(url,{
-                page : 2,
-                type : '烟煤',
-                from : '2017-03-10',
-                to : '2017-03-13'
-            });
+//            $.get(url,{
+//                page : 2,
+//                type : '烟煤',
+//                from : '2017-03-10',
+//                to : '2017-03-13'
+//            });
 
 //            $.get(url,{
 //                "id":3
@@ -48,7 +48,7 @@
 //                'storedate':'2017-03-11',
 //                'type':'烟煤',
 //                'batchno':'L023',
-//                'number' : '123',
+//                'number' : 123,
 //                '_token' : window.Laravel.csrfToken
 //            });
 

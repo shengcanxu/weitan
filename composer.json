@@ -25,7 +25,8 @@
             "App\\": "app/"
         },
         "files" :[
-            "app/library/UploadImageHelper.php"
+            "app/library/UploadImageHelper.php",
+            "app/library/WeitanLog.php"
         ]
     },
     "autoload-dev": {

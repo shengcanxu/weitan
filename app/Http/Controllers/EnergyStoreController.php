@@ -42,6 +42,7 @@ class EnergyStoreController extends Controller
         $store->author = $request->user()->id;
         $store->save();
 
+        \WeitanLog::log("新建了id=".$store->id."的入厂数据",$request->user());
         return response()->json(['status'=>'success','id'=>$store->id]);
     }
 
@@ -53,7 +54,19 @@ class EnergyStoreController extends Controller
             $store->number = $request->get('number');
             $store->author = $request->user()->id;
             $store->save();
+            \WeitanLog::log("修改了id=".$id."的入厂数据",$request->user());
             return response()->json(['status' => 'success']);
+        }
+
+        return response()->json(['status'=>'fail','error'=>'id 不存在']);
+    }
+
+    public function delete(Request $request, $id){
+        $store = EnergyStore::find($id);
+        if($store != null){
+            $store->delete();
+            \WeitanLog::log("删除了id=".$id."的入厂数据",$request->user());
+            return response()->json(['status'=>'success']);
         }
 
         return response()->json(['status'=>'fail','error'=>'id 不存在']);
@@ -66,16 +79,7 @@ class EnergyStoreController extends Controller
             $store->errorinfo = $request->get('message');
             $store->save();
 
-            return response()->json(['status'=>'success']);
-        }
-
-        return response()->json(['status'=>'fail','error'=>'id 不存在']);
-    }
-
-    public function delete($id){
-        $store = EnergyStore::find($id);
-        if($store != null){
-            $store->delete();
+            \WeitanLog::log("对id=".$id."的入厂数据标记错误信息：".$store->errorinfo,$request->user());
             return response()->json(['status'=>'success']);
         }
 
@@ -102,6 +106,8 @@ class EnergyStoreController extends Controller
                 $analysis->save();
                 array_push($ids, $analysis->id);
             }
+
+            \WeitanLog::log("新建了id=".$id."的入厂数据检验结果",$request->user());
             return response()->json(['status'=>'success', 'id'=>$ids]);
         }
 
@@ -125,6 +131,7 @@ class EnergyStoreController extends Controller
             $analysis->errorinfo = $request->get('message');
             $analysis->save();
 
+            \WeitanLog::log("对id=".$id."的入厂数据检验结果标记错误信息：".$analysis->errorinfo,$request->user());
             return response()->json(['status'=>'success']);
         }
 
