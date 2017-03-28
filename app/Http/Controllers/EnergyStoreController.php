@@ -7,12 +7,12 @@ use App\Http\Requests\TagErrorRequest;
 use App\Models\EnergyStoreAnalysis;
 use Illuminate\Http\Request;
 use App\Models\EnergyStore;
-use Illuminate\Queue\RedisQueue;
+use App\Http\Requests\EnergyStoreGetRequest;
 
 
 class EnergyStoreController extends Controller
 {
-    public function index(Request $request){
+    public function index(EnergyStoreGetRequest $request){
         $querytype = $request->get('type',null);
         $datefrom = $request->get('from', '1900-01-01');
         $dateto = $request->get('to', '2100-01-01');

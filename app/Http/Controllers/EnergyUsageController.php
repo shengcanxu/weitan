@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 use App\Models\EnergyUsage;
 use App\Http\Requests\EnergyUsageRequest;
 use App\Models\EnergyUsageAnalysis;
+use App\Http\Requests\EnergyStoreGetRequest;
 
 class EnergyUsageController extends Controller
 {
-    public function index(Request $request){
+    public function index(EnergyStoreGetRequest $request){
         $querytype = $request->get('type',null);
         $datefrom = $request->get('from', '1900-01-01');
         $dateto = $request->get('to', '2100-01-01');
