@@ -19,6 +19,8 @@ class CreateEnergyStoresTable extends Migration
             $table->string('type'); //能源类型
             $table->string('batchno')->unique(); //批次号
             $table->integer('number'); //入厂数量
+            $table->integer('usage')->default(0); //使用量
+            $table->integer('remain')->default(0); //剩余数量
             $table->integer('author'); //录入人员
             $table->boolean('analysis')->default(false); //是否已化验
             $table->boolean('error')->nullable()->default(false); //是否有错误

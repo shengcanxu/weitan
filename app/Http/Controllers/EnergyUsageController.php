@@ -44,6 +44,13 @@ class EnergyUsageController extends Controller
             $usage->type = $store->type;
             $usage->number = $request->get('number');
             $usage->author = $request->user()->id;
+
+            $store->usage = $store->usage + $usage->number;
+            $store->remain = $store->remain - $usage->number;
+            if($store->remain < 0){
+                return response()->json(['status'=>'fail','error'=>'没有足够数量']);
+            }
+            $store->save();
             $usage->save();
 
             \WeitanLog::log("新建了id=".$usage->id."的入炉数据",$request->user());

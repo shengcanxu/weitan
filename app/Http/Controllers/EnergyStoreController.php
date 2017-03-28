@@ -39,6 +39,7 @@ class EnergyStoreController extends Controller
         $store->type = $request->get('type');
         $store->batchno = $request->get('batchno');
         $store->number = $request->get('number');
+        $store->remain = $store->number;
         $store->author = $request->user()->id;
         $store->save();
 

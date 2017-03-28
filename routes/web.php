@@ -49,6 +49,8 @@ Route::group(['prefix' => 'helper'], function()
     Route::get('/token', 'HelperController@token');
     Route::get('/energytypes', 'HelperController@energytypes');
     Route::post('/uploadimage', 'HelperController@uploadimage');
+    Route::get('/energyusagedefaults','HelperController@energyusagedefaults');
+    Route::get('/energyusagedefault/{type}', 'HelperController@energyusagedefault');
 });
 
 Route::get('/energystoretest', 'TestController@energystoretest');
