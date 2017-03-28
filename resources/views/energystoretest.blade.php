@@ -81,7 +81,6 @@
 //                });
 
 //            $.post(url,{
-//                "id":1,
 //                "error":1,
 //                "message":"错误描述",
 //                '_token' : window.Laravel.csrfToken

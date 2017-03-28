@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TagErrorRequest;
 use App\Models\EnergyStore;
 use Illuminate\Http\Request;
 use App\Models\EnergyUsage;
 use App\Http\Requests\EnergyUsageRequest;
+use App\Models\EnergyUsageAnalysis;
 
 class EnergyUsageController extends Controller
 {
@@ -76,4 +78,72 @@ class EnergyUsageController extends Controller
 
         return response()->json(['status'=>'fail','error'=>'id 不存在']);
     }
+
+    public function tagerror(TagErrorRequest $request, $id){
+        $usage = EnergyUsage::find($id);
+        if($usage != null){
+            $usage->error = $request->get('error');
+            $usage->errorinfo = $request->get('message');
+            $usage->save();
+
+            \WeitanLog::log("对id=".$id."的入炉数据标记错误信息：".$usage->errorinfo,$request->user());
+            return response()->json(['status'=>'success']);
+        }
+
+        return response()->json(['status'=>'fail','error'=>'id 不存在']);
+    }
+
+    public function getanalysis(Request $request,$id){
+        $analysises = EnergyUsageAnalysis::where("energy_usage_id","=", $id)->get();
+
+        $itemsArray = [];
+        foreach ($analysises as $item){
+            array_push($itemsArray, $item->attributesToArray());
+        }
+        return response()->json($itemsArray);
+    }
+
+    public function storeanalysis(Request $request, $id){
+        $store = EnergyUsage::find($id);
+
+        if($store) {
+            $device = $request->get('device');
+            $method = $request->get('method');
+            $data = $request->get('data');
+            $ids = [];
+            foreach ($data as $item){
+                $analysis = new EnergyUsageAnalysis();
+                $analysis->energy_usage_id = $id;
+                $analysis->device = $device;
+                $analysis->method = $method;
+                $analysis->dwfrl = $item['dwfrl'];
+                $analysis->dwrlhtl = $item['dwrlhtl'];
+                $analysis->tyhl = $item['tyhl'];
+                $analysis->author = $request->user()->id;
+                $analysis->save();
+                array_push($ids, $analysis->id);
+            }
+
+            \WeitanLog::log("新建了id=".$id."的入厂数据检验结果",$request->user());
+            return response()->json(['status'=>'success', 'id'=>$ids]);
+        }
+
+        return response()->json(['status'=>'fail','error'=>'energy_usage_id 不存在']);
+    }
+
+    public function analysistagerror(TagErrorRequest $request, $id, $aid){
+        $analysis = EnergyUsageAnalysis::find($aid);
+        if($analysis != null){
+            $analysis->error = $request->get('error');
+            $analysis->errorinfo = $request->get('message');
+            $analysis->save();
+
+            \WeitanLog::log("对id=".$id."的入炉数据检验结果标记错误信息：".$analysis->errorinfo,$request->user());
+            return response()->json(['status'=>'success']);
+        }
+
+        return response()->json(['status'=>'fail','error'=>'id 不存在']);
+    }
+
+
 }

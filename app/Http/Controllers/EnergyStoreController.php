@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EnergyStoreRequest;
-use App\Http\Requests\EnergyStoreTagErrorRequest;
+use App\Http\Requests\TagErrorRequest;
 use App\Models\EnergyStoreAnalysis;
 use Illuminate\Http\Request;
 use App\Models\EnergyStore;
@@ -72,7 +72,7 @@ class EnergyStoreController extends Controller
         return response()->json(['status'=>'fail','error'=>'id 不存在']);
     }
 
-    public function tagerror(EnergyStoreTagErrorRequest $request, $id){
+    public function tagerror(TagErrorRequest $request, $id){
         $store = EnergyStore::find($id);
         if($store != null){
             $store->error = $request->get('error');
@@ -124,7 +124,7 @@ class EnergyStoreController extends Controller
         return response()->json($itemsArray);
     }
 
-    public function analysistagerror(EnergyStoreTagErrorRequest $request,$id, $aid){
+    public function analysistagerror(TagErrorRequest $request, $id, $aid){
         $analysis = EnergyStoreAnalysis::find($aid);
         if($analysis != null){
             $analysis->error = $request->get('error');

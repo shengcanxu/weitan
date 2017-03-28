@@ -21,7 +21,7 @@
             //var url ="http://localhost/weitan2/public/EnergyUsage/1/change";
             //var url ="http://localhost/weitan2/public/EnergyUsage/1/tagerror";
             //var url ="http://localhost/weitan2/public/EnergyUsage/1/analysis";
-            //var url ="http://localhost/weitan2/public/EnergyUsage/1/analysis/1/tagerror";
+            var url ="http://localhost/weitan2/public/EnergyUsage/1/analysis/1/tagerror";
             if(pos > 0){
                 url = url + location.href.substr(pos);
             }
@@ -74,12 +74,11 @@
 //                    '_token' : window.Laravel.csrfToken
 //                });
 
-//            $.post(url,{
-//                "id":1,
-//                "error":1,
-//                "message":"错误描述",
-//                '_token' : window.Laravel.csrfToken
-//            });
+            $.post(url,{
+                "error":1,
+                "message":"错误描述",
+                '_token' : window.Laravel.csrfToken
+            });
         }
 
     </script>

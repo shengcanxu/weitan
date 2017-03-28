@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 
-class EnergyStoreTagErrorRequest extends BaseFormRequest
+class TagErrorRequest extends BaseFormRequest
 {
     public function messages()
     {

@@ -37,6 +37,10 @@ Route::group(['middleware'=>'auth', 'prefix'=>'EnergyUsage'], function(){
     Route::post('/','EnergyUsageController@store');
     Route::post('/{id}/change', 'EnergyUsageController@change');
     Route::get('/{id}/delete', 'EnergyUsageController@delete');
+    Route::post('/{id}/tagerror', 'EnergyUsageController@tagerror');
+    Route::get('/{id}/analysis', 'EnergyUsageController@getanalysis');
+    Route::post('/{id}/analysis', 'EnergyUsageController@storeanalysis');
+    Route::post('/{id}/analysis/{aid}/tagerror', 'EnergyUsageController@analysistagerror');
 });
 
 
