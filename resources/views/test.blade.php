@@ -16,7 +16,7 @@
     <script language="javascript">
         function login(){
             var pos = location.href.indexOf("?");
-            //var url ="http://localhost/weitan2/public/EnergyStore";
+            var url ="http://localhost/weitan2/public/EnergyStore";
             //var url ="http://localhost/weitan2/public/EnergyStore/1/delete";
             //var url ="http://localhost/weitan2/public/EnergyStore/1/change";
             //var url ="http://localhost/weitan2/public/EnergyStore/1/tagerror";
@@ -27,11 +27,12 @@
                 url = url + location.href.substr(pos);
             }
 
-//            $.get(url,{
-//                type : '烟煤',
-//                from : '2017-03-10',
-//                to : '2017-03-13'
-//            });
+            $.get(url,{
+                page : 2,
+                type : '烟煤',
+                from : '2017-03-10',
+                to : '2017-03-13'
+            });
 
 //            $.get(url,{
 //                "id":3

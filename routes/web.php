@@ -25,7 +25,7 @@ Route::group(['middleware'=>'auth','prefix'=>'EnergyStore'], function (){
     Route::get('/{id}/delete', 'EnergyStoreController@delete');
     Route::post('/{id}/change', 'EnergyStoreController@change');
     Route::post('/{id}/tagerror', 'EnergyStoreController@tagerror');
-    Route::post('/{id}/analysis', 'EnergyStoreController@analysis');
+    Route::post('/{id}/analysis', 'EnergyStoreController@storeanalysis');
     Route::get('/{id}/analysis', 'EnergyStoreController@getanalysis');
     Route::post('/{id}/analysis/{aid}/tagerror', 'EnergyStoreController@analysistagerror');
 });

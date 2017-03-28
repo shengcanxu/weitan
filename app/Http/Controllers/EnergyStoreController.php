@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EnergyStoreChangeRequest;
 use App\Http\Requests\EnergyStoreRequest;
 use App\Http\Requests\EnergyStoreTagErrorRequest;
 use App\Models\EnergyStoreAnalysis;
@@ -22,8 +21,8 @@ class EnergyStoreController extends Controller
         if($querytype){
             $store = $store->where('type',"=", $querytype);
         }
+        $items = $store->paginate(20);
 
-        $items = $store->get();
         $items->load('author');
         $itemsArray = [];
         foreach ($items as $item){
@@ -83,7 +82,7 @@ class EnergyStoreController extends Controller
         return response()->json(['status'=>'fail','error'=>'id 不存在']);
     }
 
-    public function analysis(Request $request, $id){
+    public function storeanalysis(Request $request, $id){
         $store = EnergyStore::find($id);
 
         if($store) {
