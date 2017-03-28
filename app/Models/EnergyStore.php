@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\EnergyStore
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EnergyStore extends Model
 {
+    use SoftDeletes;
+
     public function author(){
         return $this->belongsTo('App\User','author');
     }

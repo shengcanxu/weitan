@@ -22,7 +22,10 @@ class CreateEnergyStoreAnalysisTable extends Migration
             $table->double('dwrlhtl'); //单位热值含碳量
             $table->double('tyhl'); //碳氧化率
             $table->integer('author'); //录入人员
+            $table->boolean('error')->nullable()->default(false); //是否有错误
+            $table->string('errorinfo',10000)->nullable(); //错误信息
             $table->timestamps(); //录入时间
+            $table->softDeletes(); //删除时间
         });
     }
 

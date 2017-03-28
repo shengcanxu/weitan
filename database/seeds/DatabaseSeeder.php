@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         Eloquent::unguard();
         $this->call(EnergyTypeSeeder::class);
+        $this->call(EnergyStoreSeeder::class);
+        $this->call(EnergyStoreAnalysisSeeder::class);
         Eloquent::reguard();
     }
 }

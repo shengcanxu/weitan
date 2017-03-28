@@ -27,6 +27,6 @@ class CreateEnergyTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('energytypes');
+        Schema::dropIfExists('energy_types');
     }
 }

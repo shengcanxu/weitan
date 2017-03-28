@@ -22,9 +22,12 @@ Route::get('/home', 'HomeController@index');
 Route::group(['middleware'=>'auth','prefix'=>'EnergyStore'], function (){
     Route::get('/', 'EnergyStoreController@index');
     Route::post('/', 'EnergyStoreController@store');
-    Route::post('/tagerror', 'EnergyStoreController@tagerror');
-    Route::post('/analysis', 'EnergyStoreController@analysis');
-    Route::get('/analysis', 'EnergyStoreController@getanalysis');
+    Route::get('/{id}/delete', 'EnergyStoreController@delete');
+    Route::post('/{id}/change', 'EnergyStoreController@change');
+    Route::post('/{id}/tagerror', 'EnergyStoreController@tagerror');
+    Route::post('/{id}/analysis', 'EnergyStoreController@analysis');
+    Route::get('/{id}/analysis', 'EnergyStoreController@getanalysis');
+    Route::post('/{id}/analysis/{aid}/tagerror', 'EnergyStoreController@analysistagerror');
 });
 
 Route::group(['prefix' => 'helper'], function()

@@ -22,7 +22,6 @@ class EnergyStoreTagErrorRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer|min:1',
             'error' => 'required|boolean',
             'message' => 'max:400'
         ];
