@@ -16,29 +16,32 @@
     <script language="javascript">
         function login(){
             var pos = location.href.indexOf("?");
-            var url ="http://localhost/weitan2/public/EnergyUsage";
+            //var url ="http://localhost/weitan2/public/EnergyUsage";
             //var url ="http://localhost/weitan2/public/EnergyUsage/1/delete";
             //var url ="http://localhost/weitan2/public/EnergyUsage/1/change";
             //var url ="http://localhost/weitan2/public/EnergyUsage/1/tagerror";
             //var url ="http://localhost/weitan2/public/EnergyUsage/1/analysis";
             //var url ="http://localhost/weitan2/public/EnergyUsage/1/analysis/1/tagerror";
+            //var url = "http://localhost/weitan2/public/EnergyUsage/calculateCO2";
+            //var url = "http://localhost/weitan2/public/EnergyUsage/calculateCO2/2017-01-11";
+            var url ="http://localhost/weitan2/public/EnergyUsage/CO2output";
             if(pos > 0){
                 url = url + location.href.substr(pos);
             }
 
-//            $.get(url,{
-//                page : 1,
-//                type : '烟煤',
-//                from : '2017-01-01',
-//                to : '2017-03-13'
-//            });
-
-            $.post(url,{
-                'usagedate':'2017-03-11',
-                'store_id':1,
-                'number' : 1,
-                '_token' : window.Laravel.csrfToken
+            $.get(url,{
+                page : 1,
+                type : '烟煤',
+                from : '2017-01-01',
+                to : '2017-03-13'
             });
+
+//            $.post(url,{
+//                'usagedate':'2017-03-11',
+//                'store_id':1,
+//                'number' : 1,
+//                '_token' : window.Laravel.csrfToken
+//            });
 
 //            $.post(url,{
 //                "error":1,

@@ -16,7 +16,7 @@ class EnergyUsageSeeder extends Seeder
         EnergyUsage::firstOrCreate(array('usagedate'=>'2017-01-11','energystore'=>1,'type'=>'无烟煤','number'=>3,'author'=>1));
         EnergyUsage::firstOrCreate(array('usagedate'=>'2017-01-11','energystore'=>1,'type'=>'烟煤','number'=>12,'author'=>1));
         EnergyUsage::firstOrCreate(array('usagedate'=>'2017-01-11','energystore'=>1,'type'=>'无烟煤','number'=>13,'author'=>1));
-        EnergyUsage::firstOrCreate(array('usagedate'=>'2017-01-11','energystore'=>1,'type'=>'烟煤','number'=>23,'author'=>1));
-        EnergyUsage::firstOrCreate(array('usagedate'=>'2017-01-11','energystore'=>1,'type'=>'无烟煤','number'=>1323,'author'=>1));
+        EnergyUsage::firstOrCreate(array('usagedate'=>'2017-01-13','energystore'=>1,'type'=>'烟煤','number'=>23,'author'=>1));
+        EnergyUsage::firstOrCreate(array('usagedate'=>'2017-01-13','energystore'=>1,'type'=>'无烟煤','number'=>1323,'author'=>1));
     }
 }

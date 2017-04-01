@@ -41,6 +41,15 @@ Route::group(['middleware'=>'auth', 'prefix'=>'EnergyUsage'], function(){
     Route::get('/{id}/analysis', 'EnergyUsageController@getanalysis');
     Route::post('/{id}/analysis', 'EnergyUsageController@storeanalysis');
     Route::post('/{id}/analysis/{aid}/tagerror', 'EnergyUsageController@analysistagerror');
+    Route::get('/calculateCO2', 'EnergyUsageController@docalculateCO2');
+    Route::get('/calculateCO2/{date}', 'EnergyUsageController@docalculateCO2AtDate');
+    Route::get('/CO2output', 'EnergyUsageController@CO2output');
+});
+
+//化石燃料盘库数据
+Route::group(['middleware'=>'auth', 'prefix'=>'EnergyStorage'], function(){
+    Route::get('/energyusage', 'EnergyStorageController@enerageusage');
+    Route::get('/cusage', 'EnergyStorageController@cusage');
 });
 
 
@@ -55,5 +64,6 @@ Route::group(['prefix' => 'helper'], function()
 
 Route::get('/energystoretest', 'TestController@energystoretest');
 Route::get('/energyusagetest', 'TestController@energyusagetest');
+Route::get('/test','TestController@index2');
 
 

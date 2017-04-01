@@ -108,11 +108,29 @@ class EnergyStoreController extends Controller
                 array_push($ids, $analysis->id);
             }
 
+            $this->calculateCO2($store);
             \WeitanLog::log("新建了id=".$id."的入厂数据检验结果",$request->user());
             return response()->json(['status'=>'success', 'id'=>$ids]);
         }
 
         return response()->json(['status'=>'fail','error'=>'energy_store_id 不存在']);
+    }
+
+    private function calculateCO2($store){
+        $analysises = EnergyStoreAnalysis::where('energy_store_id','=',$store->id)->get();
+
+        $dwfrl=0.0; $dwrlhtl=0.0; $tyhl=0.0;
+        foreach ($analysises as $analysis){
+            $dwfrl = $dwfrl + $analysis->dwfrl;
+            $dwrlhtl = $dwrlhtl + $analysis->dwrlhtl;
+            $tyhl = $tyhl + $analysis->tyhl;
+        }
+        $len = sizeof($analysises);
+        $store->dwfrl = number_format($dwfrl / $len, 4);
+        $store->dwrlhtl = number_format($dwrlhtl / $len,4);
+        $store->tyhl = number_format($tyhl / $len,4);
+        $store->analysis = true;
+        $store->save();
     }
 
     public function getanalysis(Request $request,$id){

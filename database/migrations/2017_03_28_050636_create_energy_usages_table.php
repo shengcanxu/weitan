@@ -18,9 +18,12 @@ class CreateEnergyUsagesTable extends Migration
             $table->date('usagedate'); //入炉时间
             $table->integer('energystore'); //入厂信息ID
             $table->string('type'); //能源类型
-            $table->integer('number'); //入炉数量
+            $table->double('number'); //入炉数量
             $table->integer('author'); //录入人员
             $table->boolean('analysis')->default(false); //是否已化验
+            $table->double('dwfrl')->default(0.0); //低位发热量
+            $table->double('dwrlhtl')->default(0.0); //单位热值含碳量
+            $table->double('tyhl')->default(0.0); //碳氧化率
             $table->boolean('error')->nullable()->default(false); //是否有错误
             $table->string('errorinfo',10000)->nullable(); //错误信息
             $table->timestamps(); //录入时间

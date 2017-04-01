@@ -6,11 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\Permission;
 use App\User;
+Use DateTime;
+use DateInterval;
 
 class TestController extends Controller
 {
     public function  index2(){
-        return view('test');
+        $date = new DateTime('2017-01-01');
+        $date = $date->sub(new DateInterval('P1D'));
+        var_dump($date);
+//        for ($i=0; $i<100; $i++) {
+//            $date->add(new DateInterval('P1D'));
+//            echo $date->format('Y-m-d') . "\n";
+//        }
     }
 
     public function  energystoretest(){
