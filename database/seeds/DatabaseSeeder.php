@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EnergyUsageSeeder::class);
         $this->call(EnergyUsageAnalysisSeeder::class);
         $this->call(EnergyUsageDefaultSeeder::class);
+
+        $this->call(ProcedureStoreSeeder::class);
         Eloquent::reguard();
     }
 }

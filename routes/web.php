@@ -52,6 +52,18 @@ Route::group(['middleware'=>'auth', 'prefix'=>'EnergyStorage'], function(){
     Route::get('/cusage', 'EnergyStorageController@cusage');
 });
 
+//过程排放入库数据
+Route::group(['middleware'=>'auth','prefix'=>'Procedure'], function (){
+    Route::get('/', 'ProcedureStoreController@index');
+    Route::post('/', 'ProcedureStoreController@store');
+    Route::get('/{id}/delete', 'ProcedureStoreController@delete');
+    Route::post('/{id}/change', 'ProcedureStoreController@change');
+    Route::post('/{id}/tagerror', 'ProcedureStoreController@tagerror');
+    Route::post('/{id}/analysis', 'ProcedureStoreController@storeanalysis');
+    Route::get('/{id}/analysis', 'ProcedureStoreController@getanalysis');
+    Route::post('/{id}/analysis/{aid}/tagerror', 'ProcedureStoreController@analysistagerror');
+});
+
 
 Route::group(['prefix' => 'helper'], function()
 {
@@ -64,6 +76,7 @@ Route::group(['prefix' => 'helper'], function()
 
 Route::get('/energystoretest', 'TestController@energystoretest');
 Route::get('/energyusagetest', 'TestController@energyusagetest');
+Route::get('/procedurestoretest','TestController@procedurestoretest');
 Route::get('/test','TestController@index2');
 
 

@@ -28,4 +28,8 @@ class TestController extends Controller
     public function energyusagetest(){
         return view("energyusagetest");
     }
+
+    public function procedurestoretest(){
+        return view("procedurestoretest");
+    }
 }

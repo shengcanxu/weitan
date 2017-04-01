@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EnergyStoreGetRequest extends BaseFormRequest
+class TypeGetRequest extends BaseFormRequest
 {
 
     public function messages()

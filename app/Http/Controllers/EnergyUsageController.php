@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 use App\Models\EnergyUsage;
 use App\Http\Requests\EnergyUsageRequest;
 use App\Models\EnergyUsageAnalysis;
-use App\Http\Requests\EnergyStoreGetRequest;
+use App\Http\Requests\TypeGetRequest;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class EnergyUsageController extends Controller
 {
-    public function index(EnergyStoreGetRequest $request){
+    public function index(TypeGetRequest $request){
         $querytype = $request->get('type',null);
         $datefrom = $request->get('from', '1900-01-01');
         $dateto = $request->get('to', '2100-01-01');
@@ -217,7 +217,7 @@ class EnergyUsageController extends Controller
         return response()->json(['status'=>'fail','error'=>'id 不存在']);
     }
 
-    public function CO2output(EnergyStoreGetRequest $request){
+    public function CO2output(TypeGetRequest $request){
         $querytype = $request->get('type',null);
         $datefrom = $request->get('from', '1900-01-01');
         $dateto = $request->get('to', '2100-01-01');
