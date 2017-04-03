@@ -16,16 +16,14 @@ class CreateProcedureStoresTable extends Migration
         Schema::create("procedure_stores",function(Blueprint $table){
             $table->increments('id');
             $table->date('storedate'); //入厂时间
-            $table->string('type'); //能源类型
+            $table->string('type'); //物料类型
             $table->string('batchno')->unique(); //批次号
             $table->double('number'); //入厂数量
             $table->integer('usage')->default(0); //使用量
             $table->integer('remain')->default(0); //剩余数量
             $table->integer('author'); //录入人员
             $table->boolean('analysis')->default(false); //是否已化验
-            $table->double('dwfrl')->default(0.0); //低位发热量
-            $table->double('dwrlhtl')->default(0.0); //单位热值含碳量
-            $table->double('tyhl')->default(0.0); //碳氧化率
+            $table->double('pfyz')->default(0.0); //二氧化碳排放因子
             $table->boolean('error')->nullable()->default(false); //是否有错误
             $table->string('errorinfo',10000)->nullable(); //错误信息
             $table->timestamps(); //录入时间

@@ -98,9 +98,7 @@ class ProcedureStoreController extends Controller
                 $analysis->procedure_store_id = $id;
                 $analysis->device = $device;
                 $analysis->method = $method;
-                $analysis->dwfrl = $item['dwfrl'];
-                $analysis->dwrlhtl = $item['dwrlhtl'];
-                $analysis->tyhl = $item['tyhl'];
+                $analysis->pfyz = $item["pfyz"];
                 $analysis->author = $request->user()->id;
                 $analysis->save();
                 array_push($ids, $analysis->id);
@@ -111,22 +109,18 @@ class ProcedureStoreController extends Controller
             return response()->json(['status'=>'success', 'id'=>$ids]);
         }
 
-        return response()->json(['status'=>'fail','error'=>'energy_store_id 不存在']);
+        return response()->json(['status'=>'fail','error'=>'procedure_store_id 不存在']);
     }
 
     private function calculateCO2($store){
         $analysises = ProcedureStoreAnalysis::where('procedure_store_id','=',$store->id)->get();
 
-        $dwfrl=0.0; $dwrlhtl=0.0; $tyhl=0.0;
+        $pfyz=0.0;
         foreach ($analysises as $analysis){
-            $dwfrl = $dwfrl + $analysis->dwfrl;
-            $dwrlhtl = $dwrlhtl + $analysis->dwrlhtl;
-            $tyhl = $tyhl + $analysis->tyhl;
+            $pfyz = $pfyz + $analysis->pfyz;
         }
         $len = sizeof($analysises);
-        $store->dwfrl = number_format($dwfrl / $len, 4);
-        $store->dwrlhtl = number_format($dwrlhtl / $len,4);
-        $store->tyhl = number_format($tyhl / $len,4);
+        $store->pfyz = number_format($pfyz / $len, 4);
         $store->analysis = true;
         $store->save();
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProcedureStoreAnalysisTable extends Migration
+class CreateProdecureUsagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,22 @@ class CreateProcedureStoreAnalysisTable extends Migration
      */
     public function up()
     {
-        Schema::create("procedure_store_analysis",function(Blueprint $table){
+        Schema::create("procedure_usages",function(Blueprint $table){
             $table->increments('id');
-            $table->integer('procedure_store_id'); //入厂数据ID
-            $table->string('device'); //设备
-            $table->string('method'); //分析方法
-            $table->double('pfyz'); //二氧化碳排放因子
+            $table->date('usagedate'); //使用时间
+            $table->integer('procedurestore'); //入厂信息ID
+            $table->string('type'); //能源类型
+            $table->double('number'); //使用数量
             $table->integer('author'); //录入人员
+            $table->boolean('analysis')->default(false); //是否已化验
+            $table->double('pfyz')->default(0.0); //排放因子
             $table->boolean('error')->nullable()->default(false); //是否有错误
             $table->string('errorinfo',10000)->nullable(); //错误信息
             $table->timestamps(); //录入时间
             $table->softDeletes(); //删除时间
         });
+
+
     }
 
     /**
@@ -34,6 +38,6 @@ class CreateProcedureStoreAnalysisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('procedure_store_analysis');
+        Schema::dropIfExists('procedure_usages');
     }
 }

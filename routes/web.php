@@ -64,11 +64,27 @@ Route::group(['middleware'=>'auth','prefix'=>'Procedure'], function (){
     Route::post('/{id}/analysis/{aid}/tagerror', 'ProcedureStoreController@analysistagerror');
 });
 
+//过程排放使用数据
+Route::group(['middleware'=>'auth', 'prefix'=>'ProcedureUsage'], function(){
+    Route::get('/','ProcedureUsageController@index');
+    Route::post('/','ProcedureUsageController@store');
+    Route::post('/{id}/change', 'ProcedureUsageController@change');
+    Route::get('/{id}/delete', 'ProcedureUsageController@delete');
+    Route::post('/{id}/tagerror', 'ProcedureUsageController@tagerror');
+    Route::get('/{id}/analysis', 'ProcedureUsageController@getanalysis');
+    Route::post('/{id}/analysis', 'ProcedureUsageController@storeanalysis');
+    Route::post('/{id}/analysis/{aid}/tagerror', 'ProcedureUsageController@analysistagerror');
+    Route::get('/calculateCO2', 'ProcedureUsageController@docalculateCO2');
+    Route::get('/calculateCO2/{date}', 'ProcedureUsageController@docalculateCO2AtDate');
+    Route::get('/CO2output', 'ProcedureUsageController@CO2output');
+});
+
 
 Route::group(['prefix' => 'helper'], function()
 {
     Route::get('/token', 'HelperController@token');
     Route::get('/energytypes', 'HelperController@energytypes');
+    Route::get('/materialtypes', 'HelperController@materialtypes');
     Route::post('/uploadimage', 'HelperController@uploadimage');
     Route::get('/energyusagedefaults','HelperController@energyusagedefaults');
     Route::get('/energyusagedefault/{type}', 'HelperController@energyusagedefault');
@@ -77,6 +93,7 @@ Route::group(['prefix' => 'helper'], function()
 Route::get('/energystoretest', 'TestController@energystoretest');
 Route::get('/energyusagetest', 'TestController@energyusagetest');
 Route::get('/procedurestoretest','TestController@procedurestoretest');
+Route::get('/procedureusagetest', 'TestController@procedureusagetest');
 Route::get('/test','TestController@index2');
 
 

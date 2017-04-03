@@ -16,25 +16,31 @@
     <script language="javascript">
         function login(){
             var pos = location.href.indexOf("?");
-            //var url ="http://localhost/weitan2/public/Procedure";
-            //var url ="http://localhost/weitan2/public/Procedure/4/delete";
-            //var url ="http://localhost/weitan2/public/Procedure/5/change";
-            //var url ="http://localhost/weitan2/public/Procedure/1/tagerror";
-            var url ="http://localhost/weitan2/public/Procedure/1/analysis";
-            //var url ="http://localhost/weitan2/public/Procedure/1/analysis/1/tagerror";
+            //var url ="http://localhost/weitan2/public/ProcedureUsage";
+            //var url ="http://localhost/weitan2/public/ProcedureUsage/1/delete";
+            //var url ="http://localhost/weitan2/public/ProcedureUsage/1/change";
+            //var url ="http://localhost/weitan2/public/ProcedureUsage/2/tagerror";
+            //var url ="http://localhost/weitan2/public/ProcedureUsage/2/analysis";
+            var url ="http://localhost/weitan2/public/ProcedureUsage/1/analysis/1/tagerror";
+            //var url = "http://localhost/weitan2/public/ProcedureUsage/calculateCO2";
+            //var url = "http://localhost/weitan2/public/ProcedureUsage/calculateCO2/2017-01-11";
+            //var url ="http://localhost/weitan2/public/ProcedureUsage/CO2output";
             if(pos > 0){
                 url = url + location.href.substr(pos);
             }
 
 //            $.get(url,{
 //                page : 1,
-//                type : '烟煤',
-//                from : '2017-03-10',
+//                type : '石灰石',
+//                from : '2017-01-01',
 //                to : '2017-03-13'
 //            });
 
-//            $.get(url,{
-//                "id":3
+//            $.post(url,{
+//                'usagedate':'2017-03-11',
+//                'store_id':1,
+//                'number' : 2,
+//                '_token' : window.Laravel.csrfToken
 //            });
 
 //            $.post(url,{
@@ -44,18 +50,9 @@
 //            });
 
 //            $.post(url,{
-//                'storedate':'2017-03-11',
-//                'type':'烟煤',
-//                'batchno':'L023',
-//                'number' : 123,
-//                '_token' : window.Laravel.csrfToken
-//            });
-
-//            $.post(url,{
-//                'storedate':'2017-03-11',
-//                'type':'无烟煤',
-//                'batchno':'forchange',
-//                'number' : '123',
+//                'usagedate':'2017-03-11',
+//                'store_id' : 1,
+//                'number' : '1',
 //                '_token' : window.Laravel.csrfToken
 //            });
 
@@ -67,19 +64,19 @@
 //                    'device' : '分析仪', //设备
 //                    'method' : '抽样测量法', //分析方法
 //                    'data' : [{
-//                        'pfyz': 0.405, //排放因子
+//                        'pfyz': 0.468, //排放因子
 //                    },{
-//                        'pfyz': 0.407, //排放因子
+//                        'pfyz': 0.466, //排放因子
 //                    }],
 //
 //                    '_token' : window.Laravel.csrfToken
 //                });
 
-//            $.post(url,{
-//                "error":1,
-//                "message":"错误描述",
-//                '_token' : window.Laravel.csrfToken
-//            });
+            $.post(url,{
+                "error":1,
+                "message":"错误描述",
+                '_token' : window.Laravel.csrfToken
+            });
         }
 
     </script>

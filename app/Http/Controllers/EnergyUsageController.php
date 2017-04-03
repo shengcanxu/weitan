@@ -57,22 +57,31 @@ class EnergyUsageController extends Controller
             $store->save();
             $usage->save();
 
-            \WeitanLog::log("新建了id=".$usage->id."的入炉数据",$request->user());
+            \WeitanLog::log("新建了id=".$usage->id."的化石燃料入炉数据",$request->user());
             return response()->json(['status' => 'success', 'id' => $usage->id]);
         }
 
-        return response()->json(['status' => 'fail', 'error'=> '入厂数据ID不存在']);
+        return response()->json(['status' => 'fail', 'error'=> '化石燃料入厂数据ID不存在']);
     }
 
     public function change(EnergyUsageRequest $request, $id){
         $usage = EnergyUsage::find($id);
+        $store = EnergyStore::find($usage->energystore);
         if($usage != null) {
+            $originalNumber = $usage->number;
             $usage->usagedate = $request->get('usagedate');
             $usage->number = $request->get('number');
             $usage->author = $request->user()->id;
+
+            $store->usage = $store->usage + $usage->number - $originalNumber;
+            $store->remain = $store->remain - $usage->number + $originalNumber;
+            if($store->remain < 0 || $store->usage < 0 ){
+                return response()->json(['status'=>'fail', 'error'=>'没有足够数量']);
+            }
+            $store->save();
             $usage->save();
 
-            \WeitanLog::log("改变了id=".$id."的入炉数据",$request->user());
+            \WeitanLog::log("改变了id=".$id."的化石燃料入炉数据",$request->user());
             return response()->json(['status' => 'success']);
         }
 
@@ -84,7 +93,7 @@ class EnergyUsageController extends Controller
         if($usage != null){
             $usage->delete();
 
-            \WeitanLog::log("删除了id=".$id."的入炉数据",$request->user());
+            \WeitanLog::log("删除了id=".$id."的化石燃料入炉数据",$request->user());
             return response()->json(['status'=>'success']);
         }
 
@@ -98,7 +107,7 @@ class EnergyUsageController extends Controller
             $usage->errorinfo = $request->get('message');
             $usage->save();
 
-            \WeitanLog::log("对id=".$id."的入炉数据标记错误信息：".$usage->errorinfo,$request->user());
+            \WeitanLog::log("对id=".$id."的化石燃料入炉数据标记错误信息：".$usage->errorinfo,$request->user());
             return response()->json(['status'=>'success']);
         }
 
@@ -137,7 +146,7 @@ class EnergyUsageController extends Controller
             }
 
             $this->calculateCO2($usage);
-            \WeitanLog::log("新建了id=".$id."的入厂数据检验结果",$request->user());
+            \WeitanLog::log("新建了id=".$id."的化石燃料入厂数据检验结果",$request->user());
             return response()->json(['status'=>'success', 'id'=>$ids]);
         }
 
@@ -210,7 +219,7 @@ class EnergyUsageController extends Controller
             $analysis->errorinfo = $request->get('message');
             $analysis->save();
 
-            \WeitanLog::log("对id=".$id."的入炉数据检验结果标记错误信息：".$analysis->errorinfo,$request->user());
+            \WeitanLog::log("对id=".$id."的化石燃料入炉数据检验结果标记错误信息：".$analysis->errorinfo,$request->user());
             return response()->json(['status'=>'success']);
         }
 

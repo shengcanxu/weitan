@@ -32,4 +32,8 @@ class TestController extends Controller
     public function procedurestoretest(){
         return view("procedurestoretest");
     }
+
+    public function procedureusagetest(){
+        return view("procedureusagetest");
+    }
 }
