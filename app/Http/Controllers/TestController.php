@@ -44,4 +44,8 @@ class TestController extends Controller
     public function electrictest(){
         return view("electrictest");
     }
+
+    public function dirtywater(){
+        return view("dirtywatertest");
+    }
 }

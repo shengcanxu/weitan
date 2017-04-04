@@ -115,6 +115,15 @@ Route::group(['middleware'=>'auth', 'prefix'=>'Electricouter'], function(){
     Route::post('/{id}/tagerror', 'ElectricOuterUsageController@tagerror');
 });
 
+//废水厌氧
+Route::group(['middleware'=>'auth', 'prefix'=>'Dirtywater'], function(){
+    Route::get('/','DirtyWaterController@index');
+    Route::post('/','DirtyWaterController@store');
+    Route::post('/{id}/change', 'DirtyWaterController@change');
+    Route::get('/{id}/delete', 'DirtyWaterController@delete');
+    Route::post('/{id}/tagerror', 'DirtyWaterController@tagerror');
+});
+
 
 Route::group(['prefix' => 'helper'], function()
 {
@@ -135,6 +144,7 @@ Route::get('/procedurestoretest','TestController@procedurestoretest');
 Route::get('/procedureusagetest', 'TestController@procedureusagetest');
 Route::get('/heattest', 'TestController@heattest');
 Route::get('/electrictest', 'TestController@electrictest');
+Route::get('/dirtywater', 'TestController@dirtywater');
 Route::get('/test','TestController@index2');
 
 
