@@ -126,9 +126,9 @@ class EnergyStoreController extends Controller
             $tyhl = $tyhl + $analysis->tyhl;
         }
         $len = sizeof($analysises);
-        $store->dwfrl = number_format($dwfrl / $len, 4);
-        $store->dwrlhtl = number_format($dwrlhtl / $len,4);
-        $store->tyhl = number_format($tyhl / $len,4);
+        $store->dwfrl = sprintf("%.4f" , $dwfrl / $len);
+        $store->dwrlhtl = sprintf("%.4f" , $dwrlhtl / $len);
+        $store->tyhl = sprintf("%.4f" , $tyhl / $len);
         $store->analysis = true;
         $store->save();
     }

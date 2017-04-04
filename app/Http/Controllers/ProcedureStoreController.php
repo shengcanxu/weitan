@@ -120,7 +120,7 @@ class ProcedureStoreController extends Controller
             $pfyz = $pfyz + $analysis->pfyz;
         }
         $len = sizeof($analysises);
-        $store->pfyz = number_format($pfyz / $len, 4);
+        $store->pfyz = sprintf("%.4f" , $pfyz / $len);
         $store->analysis = true;
         $store->save();
     }

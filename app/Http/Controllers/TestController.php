@@ -36,4 +36,8 @@ class TestController extends Controller
     public function procedureusagetest(){
         return view("procedureusagetest");
     }
+
+    public function heattest() {
+        return view("heattest");
+    }
 }

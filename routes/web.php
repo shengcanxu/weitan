@@ -79,6 +79,15 @@ Route::group(['middleware'=>'auth', 'prefix'=>'ProcedureUsage'], function(){
     Route::get('/CO2output', 'ProcedureUsageController@CO2output');
 });
 
+//热力使用内部数据
+Route::group(['middleware'=>'auth', 'prefix'=>'Heatinner'], function(){
+    Route::get('/','HeatInnerUsageController@index');
+    Route::post('/','HeatInnerUsageController@store');
+    Route::post('/{id}/change', 'HeatInnerUsageController@change');
+    Route::get('/{id}/delete', 'HeatInnerUsageController@delete');
+    Route::post('/{id}/tagerror', 'HeatInnerUsageController@tagerror');
+});
+
 
 Route::group(['prefix' => 'helper'], function()
 {
@@ -95,6 +104,7 @@ Route::get('/energystoretest', 'TestController@energystoretest');
 Route::get('/energyusagetest', 'TestController@energyusagetest');
 Route::get('/procedurestoretest','TestController@procedurestoretest');
 Route::get('/procedureusagetest', 'TestController@procedureusagetest');
+Route::get('/heattest', 'TestController@heattest');
 Route::get('/test','TestController@index2');
 
 
