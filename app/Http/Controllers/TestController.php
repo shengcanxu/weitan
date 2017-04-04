@@ -40,4 +40,8 @@ class TestController extends Controller
     public function heattest() {
         return view("heattest");
     }
+
+    public function electrictest(){
+        return view("electrictest");
+    }
 }

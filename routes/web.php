@@ -79,7 +79,7 @@ Route::group(['middleware'=>'auth', 'prefix'=>'ProcedureUsage'], function(){
     Route::get('/CO2output', 'ProcedureUsageController@CO2output');
 });
 
-//热力使用内部数据
+//热力使用内部记录
 Route::group(['middleware'=>'auth', 'prefix'=>'Heatinner'], function(){
     Route::get('/','HeatInnerUsageController@index');
     Route::post('/','HeatInnerUsageController@store');
@@ -97,6 +97,24 @@ Route::group(['middleware'=>'auth', 'prefix'=>'Heatouter'], function(){
     Route::post('/{id}/tagerror', 'HeatOuterUsageController@tagerror');
 });
 
+//电力使用内部记录
+Route::group(['middleware'=>'auth', 'prefix'=>'Electricinner'], function(){
+    Route::get('/','ElectricInnerUsageController@index');
+    Route::post('/','ElectricInnerUsageController@store');
+    Route::post('/{id}/change', 'ElectricInnerUsageController@change');
+    Route::get('/{id}/delete', 'ElectricInnerUsageController@delete');
+    Route::post('/{id}/tagerror', 'ElectricInnerUsageController@tagerror');
+});
+
+//电力使用外部记录
+Route::group(['middleware'=>'auth', 'prefix'=>'Electricouter'], function(){
+    Route::get('/','ElectricOuterUsageController@index');
+    Route::post('/','ElectricOuterUsageController@store');
+    Route::post('/{id}/change', 'ElectricOuterUsageController@change');
+    Route::get('/{id}/delete', 'ElectricOuterUsageController@delete');
+    Route::post('/{id}/tagerror', 'ElectricOuterUsageController@tagerror');
+});
+
 
 Route::group(['prefix' => 'helper'], function()
 {
@@ -108,6 +126,7 @@ Route::group(['prefix' => 'helper'], function()
     Route::get('/energyusagedefault/{type}', 'HelperController@energyusagedefault');
     Route::get('/heatproducetypes', 'HelperController@heatProduceTypes');
     Route::get('/heatdatasource', 'HelperController@heatdatasource');
+    Route::get('/electricproducetypes', 'HelperController@electricproducetypes');
 });
 
 Route::get('/energystoretest', 'TestController@energystoretest');
@@ -115,6 +134,7 @@ Route::get('/energyusagetest', 'TestController@energyusagetest');
 Route::get('/procedurestoretest','TestController@procedurestoretest');
 Route::get('/procedureusagetest', 'TestController@procedureusagetest');
 Route::get('/heattest', 'TestController@heattest');
+Route::get('/electrictest', 'TestController@electrictest');
 Route::get('/test','TestController@index2');
 
 

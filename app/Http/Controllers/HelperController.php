@@ -36,6 +36,11 @@ class HelperController extends Controller
         return response()->json($sources);
     }
 
+    public function electricproducetypes(){
+        $types = DB::table("electric_produce_types")->pluck('name');
+        return response()->json($types);
+    }
+
     public function uploadimage(Request $request){
         if($request->hasFile("image")){
             $image = $request->file("image");
