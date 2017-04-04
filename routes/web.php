@@ -88,6 +88,15 @@ Route::group(['middleware'=>'auth', 'prefix'=>'Heatinner'], function(){
     Route::post('/{id}/tagerror', 'HeatInnerUsageController@tagerror');
 });
 
+//热力使用外部证明
+Route::group(['middleware'=>'auth', 'prefix'=>'Heatouter'], function(){
+    Route::get('/','HeatOuterUsageController@index');
+    Route::post('/','HeatOuterUsageController@store');
+    Route::post('/{id}/change', 'HeatOuterUsageController@change');
+    Route::get('/{id}/delete', 'HeatOuterUsageController@delete');
+    Route::post('/{id}/tagerror', 'HeatOuterUsageController@tagerror');
+});
+
 
 Route::group(['prefix' => 'helper'], function()
 {
@@ -98,6 +107,7 @@ Route::group(['prefix' => 'helper'], function()
     Route::get('/energyusagedefaults','HelperController@energyusagedefaults');
     Route::get('/energyusagedefault/{type}', 'HelperController@energyusagedefault');
     Route::get('/heatproducetypes', 'HelperController@heatProduceTypes');
+    Route::get('/heatdatasource', 'HelperController@heatdatasource');
 });
 
 Route::get('/energystoretest', 'TestController@energystoretest');

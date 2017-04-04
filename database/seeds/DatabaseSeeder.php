@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProcedureStoreSeeder::class);
         $this->call(ProcedureUsageSeeder::class);
         $this->call(HeatProduceTypeSeeder::class);
+        $this->call(HeatDatasourceSeeder::class);
         Eloquent::reguard();
     }
 }

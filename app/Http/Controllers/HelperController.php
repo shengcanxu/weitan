@@ -31,6 +31,11 @@ class HelperController extends Controller
         return response()->json($types);
     }
 
+    public function heatdatasource(){
+        $sources = DB::table("heat_datasource")->pluck('name');
+        return response()->json($sources);
+    }
+
     public function uploadimage(Request $request){
         if($request->hasFile("image")){
             $image = $request->file("image");
