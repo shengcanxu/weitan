@@ -13,6 +13,17 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+const vuxLoader = require('vux-loader')
+module.exports = vuxLoader.merge(webpackConfig, {
+    options: {},
+    plugins: [
+        {
+            name: 'vux-ui'
+        }
+    ]
+})
+
+
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
