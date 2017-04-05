@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EnergyUsageAnalysisSeeder::class);
         $this->call(EnergyUsageDefaultSeeder::class);
 
+        //$this->call(AreaSeeder::class);
         $this->call(MaterialTypeSeeder::class);
         $this->call(ProcedureStoreSeeder::class);
         $this->call(ProcedureUsageSeeder::class);
