@@ -25,7 +25,7 @@ class CreateDirtyWaterTable extends Migration
             $table->integer('author'); //录入人员
             $table->boolean('error')->nullable()->default(false); //是否有错误
             $table->string('errorinfo',10000)->nullable(); //错误信息
-            $table->timestamps(); //抄表时间
+            $table->timestamps(); //时间
             $table->softDeletes(); //删除时间
         });
     }

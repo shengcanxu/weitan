@@ -44,7 +44,7 @@ class HeatOuterUsageController extends Controller
         $usage->author = $request->user()->id;
         $usage->save();
 
-        \WeitanLog::log("新建了id=".$usage->id."的热力使用外部证明",$request->user());
+        \WeitanHelper::log("新建了id=".$usage->id."的热力使用外部证明",$request->user());
         return response()->json(['status'=>'success','id'=>$usage->id]);
     }
 
@@ -71,7 +71,7 @@ class HeatOuterUsageController extends Controller
 
             $usage->author = $request->user()->id;
             $usage->save();
-            \WeitanLog::log("修改了id=".$id."的热力使用外部证明",$request->user());
+            \WeitanHelper::log("修改了id=".$id."的热力使用外部证明",$request->user());
             return response()->json(['status' => 'success']);
         }
 
@@ -82,7 +82,7 @@ class HeatOuterUsageController extends Controller
         $store = HeatOuterUsage::find($id);
         if($store != null){
             $store->delete();
-            \WeitanLog::log("删除了id=".$id."的热力使用外部证明",$request->user());
+            \WeitanHelper::log("删除了id=".$id."的热力使用外部证明",$request->user());
             return response()->json(['status'=>'success']);
         }
 
@@ -96,7 +96,8 @@ class HeatOuterUsageController extends Controller
             $store->errorinfo = $request->get('message');
             $store->save();
 
-            \WeitanLog::log("对id=".$id."的热力使用外部证明标记错误信息：".$store->errorinfo,$request->user());
+            \WeitanHelper::log("对id=".$id."的热力使用外部证明标记错误信息：".$store->errorinfo,$request->user());
+            \WeitanHelper::reportError("热力使用外部证明", $store->errorinfo, $store->author, $request->user()->id );
             return response()->json(['status'=>'success']);
         }
 

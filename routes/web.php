@@ -19,6 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::group(['middleware'=>'auth', 'prefix'=>'dashboard'],function(){
+    Route::get('/','DashboardController@index');
+    Route::get('/operationlog', 'DashboardController@operationlog');
+    Route::get('/tagerror', 'DashboardController@tagerror');
+});
+
 //化石燃料入库数据
 Route::group(['middleware'=>'auth','prefix'=>'EnergyStore'], function (){
     Route::get('/', 'EnergyStoreController@index');

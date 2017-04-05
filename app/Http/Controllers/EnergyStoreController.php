@@ -43,7 +43,7 @@ class EnergyStoreController extends Controller
         $store->author = $request->user()->id;
         $store->save();
 
-        \WeitanLog::log("新建了id=".$store->id."的化石燃料入厂数据",$request->user());
+        \WeitanHelper::log("新建了id=".$store->id."的化石燃料入厂数据",$request->user());
         return response()->json(['status'=>'success','id'=>$store->id]);
     }
 
@@ -55,7 +55,7 @@ class EnergyStoreController extends Controller
             $store->number = $request->get('number');
             $store->author = $request->user()->id;
             $store->save();
-            \WeitanLog::log("修改了id=".$id."的化石燃料入厂数据",$request->user());
+            \WeitanHelper::log("修改了id=".$id."的化石燃料入厂数据",$request->user());
             return response()->json(['status' => 'success']);
         }
 
@@ -66,7 +66,7 @@ class EnergyStoreController extends Controller
         $store = EnergyStore::find($id);
         if($store != null){
             $store->delete();
-            \WeitanLog::log("删除了id=".$id."的化石燃料入厂数据",$request->user());
+            \WeitanHelper::log("删除了id=".$id."的化石燃料入厂数据",$request->user());
             return response()->json(['status'=>'success']);
         }
 
@@ -80,7 +80,8 @@ class EnergyStoreController extends Controller
             $store->errorinfo = $request->get('message');
             $store->save();
 
-            \WeitanLog::log("对id=".$id."的化石燃料入厂数据标记错误信息：".$store->errorinfo,$request->user());
+            \WeitanHelper::log("对id=".$id."的化石燃料入厂数据标记错误信息：".$store->errorinfo,$request->user());
+            \WeitanHelper::reportError("化石燃料入厂数据", $store->errorinfo, $store->author, $request->user()->id );
             return response()->json(['status'=>'success']);
         }
 
@@ -109,7 +110,7 @@ class EnergyStoreController extends Controller
             }
 
             $this->calculateCO2($store);
-            \WeitanLog::log("新建了id=".$id."的化石燃料入厂数据检验结果",$request->user());
+            \WeitanHelper::log("新建了id=".$id."的化石燃料入厂数据检验结果",$request->user());
             return response()->json(['status'=>'success', 'id'=>$ids]);
         }
 
@@ -150,7 +151,8 @@ class EnergyStoreController extends Controller
             $analysis->errorinfo = $request->get('message');
             $analysis->save();
 
-            \WeitanLog::log("对id=".$id."的化石燃料入厂数据检验结果标记错误信息：".$analysis->errorinfo,$request->user());
+            \WeitanHelper::log("对id=".$id."的化石燃料入厂数据检验结果标记错误信息：".$analysis->errorinfo,$request->user());
+            \WeitanHelper::reportError("化石燃料入厂数据检验结果", $analysis->errorinfo, $analysis->author, $request->user()->id );
             return response()->json(['status'=>'success']);
         }
 

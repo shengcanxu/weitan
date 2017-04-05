@@ -23,7 +23,7 @@
             //var url ="http://localhost/weitan2/public/Heatouter";
             //var url ="http://localhost/weitan2/public/Heatouter/1/delete";
             //var url ="http://localhost/weitan2/public/Heatouter/1/change";
-            var url ="http://localhost/weitan2/public/Heatouter/1/tagerror";
+            var url ="http://localhost/weitan2/public/Heatouter/2/tagerror";
             if(pos > 0){
                 url = url + location.href.substr(pos);
             }

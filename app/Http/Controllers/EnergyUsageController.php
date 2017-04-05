@@ -57,7 +57,7 @@ class EnergyUsageController extends Controller
             $store->save();
             $usage->save();
 
-            \WeitanLog::log("新建了id=".$usage->id."的化石燃料入炉数据",$request->user());
+            \WeitanHelper::log("新建了id=".$usage->id."的化石燃料入炉数据",$request->user());
             return response()->json(['status' => 'success', 'id' => $usage->id]);
         }
 
@@ -81,7 +81,7 @@ class EnergyUsageController extends Controller
             $store->save();
             $usage->save();
 
-            \WeitanLog::log("改变了id=".$id."的化石燃料入炉数据",$request->user());
+            \WeitanHelper::log("改变了id=".$id."的化石燃料入炉数据",$request->user());
             return response()->json(['status' => 'success']);
         }
 
@@ -93,7 +93,7 @@ class EnergyUsageController extends Controller
         if($usage != null){
             $usage->delete();
 
-            \WeitanLog::log("删除了id=".$id."的化石燃料入炉数据",$request->user());
+            \WeitanHelper::log("删除了id=".$id."的化石燃料入炉数据",$request->user());
             return response()->json(['status'=>'success']);
         }
 
@@ -107,7 +107,8 @@ class EnergyUsageController extends Controller
             $usage->errorinfo = $request->get('message');
             $usage->save();
 
-            \WeitanLog::log("对id=".$id."的化石燃料入炉数据标记错误信息：".$usage->errorinfo,$request->user());
+            \WeitanHelper::log("对id=".$id."的化石燃料入炉数据标记错误信息：".$usage->errorinfo,$request->user());
+            \WeitanHelper::reportError("化石燃料入炉数据", $usage->errorinfo, $usage->author, $request->user()->id );
             return response()->json(['status'=>'success']);
         }
 
@@ -146,7 +147,7 @@ class EnergyUsageController extends Controller
             }
 
             $this->calculateCO2($usage);
-            \WeitanLog::log("新建了id=".$id."的化石燃料入厂数据检验结果",$request->user());
+            \WeitanHelper::log("新建了id=".$id."的化石燃料入厂数据检验结果",$request->user());
             return response()->json(['status'=>'success', 'id'=>$ids]);
         }
 
@@ -219,7 +220,8 @@ class EnergyUsageController extends Controller
             $analysis->errorinfo = $request->get('message');
             $analysis->save();
 
-            \WeitanLog::log("对id=".$id."的化石燃料入炉数据检验结果标记错误信息：".$analysis->errorinfo,$request->user());
+            \WeitanHelper::log("对id=".$id."的化石燃料入炉数据检验结果标记错误信息：".$analysis->errorinfo,$request->user());
+            \WeitanHelper::reportError("化石燃料入炉数据数据检验", $analysis->errorinfo, $analysis->author, $request->user()->id );
             return response()->json(['status'=>'success']);
         }
 
